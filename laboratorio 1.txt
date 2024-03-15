@@ -1,0 +1,82 @@
+//oscar david arciniegas casanova
+const int LED_GREEN = 11;
+const int LED_RED = 12;
+const int LED_YELLOW = 13;
+
+
+void setup()
+{
+  pinMode(LED_GREEN, OUTPUT);
+  Serial.begin(9600); //Baudios
+  Serial.println("::: Menu :::");
+  Serial.println("[1]. Turn on led green");
+  Serial.println("[2]. Turn off led green");
+  Serial.println("[3]. Turn on led red ");
+  Serial.println("[4]. Turn off led red ");
+  Serial.println("[5]. Turn off led yellow ");
+  Serial.println("[6]. Turn off led yellow ");
+  Serial.println("[7]. all leds on ");
+  Serial.println("[8]. all leds off ");
+  Serial.println("[9]. flashing leds ");
+  
+  Serial.println(".::: Please, press your option.");
+}
+
+void loop()
+{
+  if (Serial.available() > 0){ 
+    char opt = Serial.read();
+    
+    if (opt == '1') {
+    	digitalWrite(LED_GREEN, HIGH);
+      	Serial.println("green led has been turned on");
+    } else if (opt == '2') {
+    	digitalWrite(LED_GREEN, LOW);
+		Serial.println("green led has been turned off");
+    } else if(opt == '3'){
+      digitalWrite(LED_RED, HIGH);
+		Serial.println("Red led has been turned on");
+    }else if(opt == '4'){
+      digitalWrite(LED_RED, LOW);
+		Serial.println("Red led has been turned of");
+    }else if (opt == '5') {
+    	digitalWrite(LED_YELLOW, HIGH);
+		Serial.println("yellow led has been turned on");
+    }else if (opt == '6') {
+    	digitalWrite(LED_YELLOW,LOW );
+		Serial.println("yellow led has been turned off");
+    }else if (opt == '7') {
+    	digitalWrite(LED_YELLOW, HIGH);
+        digitalWrite(LED_RED, HIGH);
+        digitalWrite(LED_GREEN, HIGH);
+		Serial.println("yellow,red,green led has been turned on");
+    }else if (opt == '8') {
+    	digitalWrite(LED_YELLOW, LOW);
+        digitalWrite(LED_RED, LOW);
+        digitalWrite(LED_GREEN, LOW);
+		Serial.println("yellow,red,green flashing leds");
+    }else if (opt == '9') {
+      
+      for (int i = 0; i < 1000; i++) {
+    	digitalWrite(LED_YELLOW, HIGH);
+        delay(200);
+        digitalWrite(LED_YELLOW, LOW);
+        delay(200);
+        digitalWrite(LED_RED, HIGH);
+        delay(200);
+        digitalWrite(LED_RED, LOW);
+        delay(200);
+        digitalWrite(LED_GREEN, HIGH);
+        delay(200);
+        digitalWrite(LED_GREEN, LOW);
+         
+		Serial.println("yellow,red,green led has been turned off");
+        
+      }
+    }
+    
+    else{
+    	Serial.println("Invalid option. Try again.");
+    }
+  }
+}
